@@ -349,9 +349,7 @@ module RedisFailover
     #
     # @raise [UnsupportedOperationError] if the operation isn't supported
     def verify_supported!(method)
-      if UNSUPPORTED_OPS.include?(method)
-        raise UnsupportedOperationError.new(method)
-      end
+      raise UnsupportedOperationError.new(method) if UNSUPPORTED_OPS.include?(method.to_sym)
     end
 
     # Returns node addresses.

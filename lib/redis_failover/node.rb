@@ -175,13 +175,13 @@ module RedisFailover
         redis = new_client
         yield redis
       end
-    rescue
+    rescue Exception
       raise NodeUnavailableError, self, caller
     ensure
       if redis
         begin
           redis.client.disconnect
-        rescue
+        rescue Exception
           raise NodeUnavailableError, self, caller
         end
       end
